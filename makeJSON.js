@@ -56,12 +56,18 @@ async function main() {
   let linkData = await readFile(process.argv[3], "utf8");
   let links = csvToObject(linkData);
 
-  let nodeKey = Object.keys(nodes)[0];
-
   let jsonData = {
-    nodes: nodes[nodeKey],
+    nodes: [],
     links: []
   };
+
+  let nodesForJSON = [];
+  let nodeKey = Object.keys(nodes)[0];
+  for (let k = 0; k < nodes[nodeKey].length; k++) {
+    nodesForJSON.push({ id: nodes[nodeKey][k] });
+  }
+
+  jsonData.nodes = nodesForJSON;
 
   let linksForJSON = [];
   let linkKey1 = Object.keys(links)[0];
