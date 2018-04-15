@@ -11,7 +11,7 @@ var simulation = d3
   .force(
     "link",
     d3.forceLink().id(function(d) {
-      return d;
+      return d.id;
     })
   )
   .force("charge", d3.forceManyBody())
@@ -48,7 +48,7 @@ d3.json("https://mlampert84.github.io/stammbuch_daten/stammbuch.json", function(
     );
 
   node.append("title").text(function(d) {
-    return d;
+    return d.id;
   });
 
   simulation.nodes(graph.nodes).on("tick", ticked);
